@@ -6,7 +6,7 @@ Basic   | Spec Sheet
 CPU     | Qcta 1.5 GHz Cortex-A53
 CHIPSET | Samsung Exynos 7580
 GPU     | Mali-T720MP2
-Memory  | 2GB RAM
+Memory  | 3GB RAM
 Android | 5.1.1
 Storage | 16 GB
 MicroSD | Up to 128GB
