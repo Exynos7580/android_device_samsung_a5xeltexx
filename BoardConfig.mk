@@ -22,7 +22,7 @@ TARGET_OTA_ASSERT_DEVICE := a5xe3g,a5xe3gxx,a5xelte,a5xeltexx
 DEVICE_PATH := device/samsung/a5xeltexx
 
 # Include path
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+#TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_sec
