@@ -54,19 +54,23 @@ void vendor_load_properties()
 
     property_get("ro.bootloader", bootloader);
 
-    if (strstr(bootloader, "A510F")) {
+    if (strstr(bootloader, "A510FD")) {
+        property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FDXXS2APD1:user/release-keys");
+        property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FDXXS2APD1 release-keys");
+        property_set("ro.product.model", "SM-A510FD");
+        property_set("ro.product.device", "a5xelte");
+	make_me_dual();
+    } else if (strstr(bootloader, "A510F")) {
         property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FXXS2APD1:user/release-keys");
         property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FXXS2APD1 release-keys");
         property_set("ro.product.model", "SM-A510F");
         property_set("ro.product.device", "a5xelte");
-	make_me_dual();
     } else if (strstr(bootloader, "A510M")) {
         property_set("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:5.1.1/LMY47X/A510MUBS1APC1:user/release-keys");
         property_set("ro.build.description", "a5xelteub-user 5.1.1 LMY47X A510MUBS1APC1 release-keys");
         property_set("ro.product.model", "SM-A510M");
         property_set("ro.product.device", "a5xelte");
 	property_set("ro.product.name", "a5xelteub");
-	make_me_dual();
     } else {
         property_set("ro.product.model", "SM-A510Y");
         property_set("ro.product.device", "a5xelte");
