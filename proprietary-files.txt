@@ -1,5 +1,6 @@
 ### Wifi
 etc/wifi/bcmdhd_apsta.bin
+etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_sta.bin
 etc/wifi/nvram_mfg.txt
