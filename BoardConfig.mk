@@ -17,9 +17,9 @@
 # Inherit from Exynos7580-common
 include device/samsung/exynos7580-common/BoardConfigCommon.mk
 
-TARGET_OTA_ASSERT_DEVICE := a5xe3g,a5xe3gxx,a5xelte,a5xeltexx
+TARGET_OTA_ASSERT_DEVICE := a5xelte,a5xeltexx
 
-DEVICE_PATH := device/samsung/a5xeltexx
+DEVICE_PATH := device/samsung/exynos7580-common
 
 # Include path
 #TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
@@ -48,10 +48,10 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.samsungexynos7580
 
 # Radio
-SIM_COUNT := 2
+SIM_COUNT := 1
 BOARD_MODEM_TYPE := tss310
-TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
-TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
+#TARGET_GLOBAL_CFLAGS += -DANDROID_MULTI_SIM
+#TARGET_GLOBAL_CPPFLAGS += -DANDROID_MULTI_SIM
 
 # inherit from the proprietary version
 -include vendor/samsung/a5xe3gxx/BoardConfigVendor.mk
