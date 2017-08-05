@@ -27,7 +27,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
 # Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := cm_a5xeltexx
+PRODUCT_NAME := lineage_a5xeltexx
 PRODUCT_DEVICE := a5xeltexx
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
