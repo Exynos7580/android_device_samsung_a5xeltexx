@@ -1,5 +1,5 @@
 Copyright (C) 2016-2017 Apavayan Sinha <info@apavayan.com>
-Copyright (C) 2017 Victor Lourme <contact@zeroside.co>
+<br>Copyright (C) 2017 Victor Lourme <contact@zeroside.co>
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
