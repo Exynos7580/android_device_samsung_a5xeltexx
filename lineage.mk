@@ -16,7 +16,7 @@
 #
 
 # Initialise device config
-$(call inherit-product, device/samsung/a3xeltexx/full_a5xeltexx.mk)
+$(call inherit-product, device/samsung/a5xeltexx/full_a5xeltexx.mk)
 
 # Inherit common CM phone.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)

@@ -74,4 +74,4 @@ BOARD_MODEM_TYPE := tss310
 #BOARD_NFC_CHIPSET := xxx
 
 # inherit from the proprietary version
--include vendor/samsung/a3xeltexx/BoardConfigVendor.mk
+-include vendor/samsung/a5xeltexx/BoardConfigVendor.mk
