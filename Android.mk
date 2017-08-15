@@ -23,7 +23,4 @@ include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)
 
-$(shell mkdir -p out/target/product/$(TARGET_DEVICE)/obj/KERNEL_OBJ/init)
-$(shell cp $(TARGET_KERNEL_SOURCE)/init/vmm.elf out/target/product/$(TARGET_DEVICE)/obj/KERNEL_OBJ/init/vmm.elf)
-
 endif
