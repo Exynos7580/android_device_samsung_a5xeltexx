@@ -23,9 +23,6 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit nfc enhanced configuration
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
-
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := lineage_a5xeltexx
 PRODUCT_DEVICE := a5xeltexx

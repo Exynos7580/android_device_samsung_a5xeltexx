@@ -32,51 +32,78 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 #include "log.h"
 #include "util.h"
 
-void make_me_dual()
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
+
+void property_override(char const prop[], char const value[])
 {
-	property_set("rild.libpath2", "/system/lib/libsec-ril-dsds.so");
-	property_set("persist.radio.multisim.config", "dsds");
-	property_set("ro.multisim.simslotcount", "2");
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+
+void set_sim_info ()
+{
+	FILE *file;
+	char *simslot_count_path = "/proc/simslot_count";
+	char simslot_count[2] = "\0";
+	
+	file = fopen(simslot_count_path, "r");
+	
+	if (file != NULL) {
+		simslot_count[0] = fgetc(file);
+		property_set("ro.multisim.simslotcount", simslot_count);
+		if(strcmp(simslot_count, "2") == 0) {
+			property_set("rild.libpath2", "/system/lib/libsec-ril-dsds.so");
+			property_set("persist.radio.multisim.config", "dsds");
+		}
+		fclose(file);
+	}
+	else {
+		ERROR("Could not open '%s'\n", simslot_count_path);
+	}
 }
 
 void vendor_load_properties()
 {
-    char platform[PROP_VALUE_MAX];
-    char bootloader[PROP_VALUE_MAX];
-    char device[PROP_VALUE_MAX];
-    char devicename[PROP_VALUE_MAX];
 
-    property_get("ro.bootloader", bootloader);
+    std::string bootloader = property_get("ro.bootloader");
 
-    if (strstr(bootloader, "A510FD")) {
+    if (bootloader.find("A510F") != std::string::npos) {
+	/* SM-A510F */
         property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FDXXS2APD1:user/release-keys");
         property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FDXXS2APD1 release-keys");
-        property_set("ro.product.model", "SM-A510FD");
-        property_set("ro.product.device", "a5xelte");
-	make_me_dual();
-    } else if (strstr(bootloader, "A510F")) {
-        property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FXXS2APD1:user/release-keys");
-        property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FXXS2APD1 release-keys");
         property_set("ro.product.model", "SM-A510F");
         property_set("ro.product.device", "a5xelte");
-    } else if (strstr(bootloader, "A510M")) {
-        property_set("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:5.1.1/LMY47X/A510MUBS1APC1:user/release-keys");
-        property_set("ro.build.description", "a5xelteub-user 5.1.1 LMY47X A510MUBS1APC1 release-keys");
+    } else if (bootloader.find("A510M") != std::string::npos) {
+	/* SM-A510M */
+        property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FXXS2APD1:user/release-keys");
+        property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FXXS2APD1 release-keys");
         property_set("ro.product.model", "SM-A510M");
         property_set("ro.product.device", "a5xelte");
-	property_set("ro.product.name", "a5xelteub");
     } else {
+	/* SM-A510Y */
+        property_set("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:5.1.1/LMY47X/A510MUBS1APC1:user/release-keys");
+        property_set("ro.build.description", "a5xelteub-user 5.1.1 LMY47X A510MUBS1APC1 release-keys");
         property_set("ro.product.model", "SM-A510Y");
         property_set("ro.product.device", "a5xelte");
     }
 
-    property_get("ro.product.device", device);
-    strlcpy(devicename, device, sizeof(devicename));
-    ERROR("Found bootloader id %s setting build properties for %s device\n", bootloader, devicename);
+	set_sim_info();
+
+	std::string device = property_get("ro.product.device");
+	std::string devicename = property_get("ro.product.model");
+	ERROR("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), devicename.c_str());
 }
