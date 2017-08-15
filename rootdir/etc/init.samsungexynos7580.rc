@@ -25,6 +25,9 @@ on init
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
 
 on post-fs-data
+    mkdir /cache/logs 0775 system log
+    start persistentLogging
+
     mkdir /data/media 0770 media_rw media_rw
 
     setprop vold.post_fs_data_done 1
@@ -811,6 +814,12 @@ on fs
     chown system radio /sys/class/sensors/irled_remote/vendor
     chown system radio /sys/class/sensors/irled_remote/irled_send
     chown system radio /sys/class/sensors/irled_remote/irled_send_result
+
+# Log
+service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cache/logs/log
+    user system
+    group system log
+    disabled
 
 # GPS
 service gpsd /system/bin/gpsd -c /system/etc/gps.xml
