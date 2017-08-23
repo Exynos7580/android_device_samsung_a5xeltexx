@@ -15,6 +15,5 @@
         <package android:name="com.skms.android.agent" />
         <package android:name="com.sec.android.wallet" />
         <package android:name="com.samsung.android.spay" />
-        <package android:name="com.samsung.android.spayfw" />
     </signer>
 </resources>

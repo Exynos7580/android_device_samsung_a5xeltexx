@@ -134,7 +134,7 @@ PRODUCT_COPY_FILES += \
 
 # samsung's sswap
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/sswap:root/sbin/sswap
+    $(LOCAL_PATH)/rootdir/sbin/sswap:root/sbin/sswap
 
 # Inherit from Exynos7580-common
 $(call inherit-product, device/samsung/exynos7580-common/device-common.mk)
