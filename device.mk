@@ -74,6 +74,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.universal7580
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    fingerprintd \
+    fingerprint.exynos5
+
 # Media profile
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
