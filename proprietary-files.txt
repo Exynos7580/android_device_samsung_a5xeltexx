@@ -1,5 +1,5 @@
 ### Bluetooth
-vendor/firmware/bcm43438A1_V0051.0217.hcd
+vendor/firmware/bcm43454_V0133.0213.hcd
 
 ### Camera
 cameradata/datapattern_420sp.yuv
