@@ -2,7 +2,6 @@
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     modemloader \
-	libsec-ril-wrapper
 
 # cpboot-daemon for modem
 PRODUCT_COPY_FILES += \

@@ -102,8 +102,6 @@ void convertRilSignalStrengthToHal(void *response, size_t responseLen,
 
 void convertRilDataCallToHal(RIL_Data_Call_Response_v9 *dcResponse,
         SetupDataCallResult& dcResult);
-void convertRilDataCallToHal(RIL_Data_Call_Response_v11 *dcResponse,
-        SetupDataCallResult& dcResult);
 
 void convertRilDataCallListToHal(void *response, size_t responseLen,
         hidl_vec<SetupDataCallResult>& dcResultList);
@@ -4530,8 +4528,7 @@ int radio::getDataCallListResponse(int slotId,
         populateResponseInfo(responseInfo, serial, responseType, e);
 
         hidl_vec<SetupDataCallResult> ret;
-        if ((response == NULL && responseLen != 0)
-                || responseLen % sizeof(RIL_Data_Call_Response_v11) != 0) {
+        if (response == NULL || responseLen < sizeof(RIL_Data_Call_Response_Type)) {
             RLOGE("getDataCallListResponse: invalid response");
             if (e == RIL_E_SUCCESS) responseInfo.error = RadioError::INVALID_RESPONSE;
         } else {
@@ -6718,6 +6715,15 @@ void convertRilSignalStrengthToHal(void *response, size_t responseLen,
     signalStrength.lte.cqi = rilSignalStrength->LTE_SignalStrength.cqi;
     signalStrength.lte.timingAdvance = rilSignalStrength->LTE_SignalStrength.timingAdvance;
     signalStrength.tdScdma.rscp = rilSignalStrength->TD_SCDMA_SignalStrength.rscp;
+
+	/* Samsung Signal-Strength patches */	
+	// gsm
+	signalStrength.gw.signalStrength &= 0xff;
+	// cdma
+	signalStrength.cdma.dbm %= 256;
+	signalStrength.evdo.dbm %= 256;
+	// lte
+	signalStrength.lte.signalStrength &= 0xff;
 }
 
 int radio::currentSignalStrengthInd(int slotId,
@@ -6762,25 +6768,25 @@ void convertRilDataCallToHal(RIL_Data_Call_Response_v9 *dcResponse,
 }
 
 void convertRilDataCallToHal(RIL_Data_Call_Response_v11 *dcResponse,
-        SetupDataCallResult& dcResult) {
-    dcResult.status = (DataCallFailCause) dcResponse->status;
-    dcResult.suggestedRetryTime = dcResponse->suggestedRetryTime;
-    dcResult.cid = dcResponse->cid;
-    dcResult.active = dcResponse->active;
-    dcResult.type = convertCharPtrToHidlString(dcResponse->type);
-    dcResult.ifname = convertCharPtrToHidlString(dcResponse->ifname);
-    dcResult.addresses = convertCharPtrToHidlString(dcResponse->addresses);
-    dcResult.dnses = convertCharPtrToHidlString(dcResponse->dnses);
-    dcResult.gateways = convertCharPtrToHidlString(dcResponse->gateways);
-    dcResult.pcscf = convertCharPtrToHidlString(dcResponse->pcscf);
-    dcResult.mtu = dcResponse->mtu;
+         SetupDataCallResult& dcResult) {
+     dcResult.status = (DataCallFailCause) dcResponse->status;
+     dcResult.suggestedRetryTime = dcResponse->suggestedRetryTime;
+     dcResult.cid = dcResponse->cid;
+     dcResult.active = dcResponse->active;
+     dcResult.type = convertCharPtrToHidlString(dcResponse->type);
+     dcResult.ifname = convertCharPtrToHidlString(dcResponse->ifname);
+     dcResult.addresses = convertCharPtrToHidlString(dcResponse->addresses);
+     dcResult.dnses = convertCharPtrToHidlString(dcResponse->dnses);
+     dcResult.gateways = convertCharPtrToHidlString(dcResponse->gateways);
+     dcResult.pcscf = convertCharPtrToHidlString(dcResponse->pcscf);
+     dcResult.mtu = dcResponse->mtu;
 }
 
 void convertRilDataCallListToHal(void *response, size_t responseLen,
         hidl_vec<SetupDataCallResult>& dcResultList) {
-    int num = responseLen / sizeof(RIL_Data_Call_Response_v11);
+    int num = responseLen / sizeof(RIL_Data_Call_Response_Type);
 
-    RIL_Data_Call_Response_v11 *dcResponse = (RIL_Data_Call_Response_v11 *) response;
+    RIL_Data_Call_Response_Type *dcResponse = (RIL_Data_Call_Response_Type *) response;
     dcResultList.resize(num);
     for (int i = 0; i < num; i++) {
         convertRilDataCallToHal(&dcResponse[i], dcResultList[i]);
@@ -6791,7 +6797,7 @@ int radio::dataCallListChangedInd(int slotId,
                                   int indicationType, int token, RIL_Errno e, void *response,
                                   size_t responseLen) {
     if (radioService[slotId] != NULL && radioService[slotId]->mRadioIndication != NULL) {
-        if (response == NULL || responseLen < sizeof(RIL_Data_Call_Response_v11)) {
+        if (response == NULL || responseLen < sizeof(RIL_Data_Call_Response_Type)) {
             RLOGE("dataCallListChangedInd: invalid response");
             return 0;
         }
