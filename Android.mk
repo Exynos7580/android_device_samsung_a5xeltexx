@@ -16,6 +16,7 @@
 #
 
 LOCAL_PATH := $(call my-dir)
+SAM_ROOT := hardware/samsung
 
 ifneq ($(filter s5neoltexx,$(TARGET_DEVICE)),)
 
