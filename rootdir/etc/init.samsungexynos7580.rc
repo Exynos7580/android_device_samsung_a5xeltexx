@@ -38,6 +38,14 @@ on post-fs-data
     chown system radio /sys/class/audio/earjack/state
     chown system radio /sys/class/audio/earjack/mic_adc
 
+# Fingerprint
+    mkdir /dev/validity 0770 system system
+
+# Fingerprint_sensor
+    chown system radio /sys/class/fingerprint/fingerprint/type_check
+    chown system radio /sys/class/fingerprint/fingerprint/name
+    chown system radio /sys/class/fingerprint/fingerprint/vendor
+
 # Permissions for dbmd2
     chown system audio /sys/class/voice_trigger/dbd2/vqe_use_case
     chmod 0664 /sys/class/voice_trigger/dbd2/vqe_use_case
@@ -846,6 +854,12 @@ service watchdogd /sbin/watchdogd 10 20
     class core
     seclabel u:r:watchdogd:s0
     disabled
+
+# FINGERPRINT FRAMEWORK : starts fingerprintd
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system
 
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1

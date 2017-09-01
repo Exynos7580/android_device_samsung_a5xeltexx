@@ -152,3 +152,7 @@
 # MobiCore
 /dev/mobicore             0700   system     system
 /dev/mobicore-user        0666   radio     	system
+
+# Fingerprint Sensor
+/dev/vfsspi        0660   system     system
+/dev/esfp0        0660   system     system

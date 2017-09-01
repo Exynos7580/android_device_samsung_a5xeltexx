@@ -232,5 +232,8 @@
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
 
     <!-- Configuartion to support SIM contact batch operation.-->
-    <bool name="config_sim_phonebook_batch_operation">false</bool>    
+    <bool name="config_sim_phonebook_batch_operation">false</bool>
+
+    <!-- For performance and storage reasons, limit the number of fingerprints per user -->
+    <integer name="config_fingerprintMaxTemplatesPerUser">4</integer> 
 </resources>
