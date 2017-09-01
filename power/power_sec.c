@@ -142,14 +142,14 @@ static int interactive_set_profile(int profile)
 static void interactive_power_init(struct sec_power_module __unused * sec)
 {
 	/* initialize generic parameters first */
-	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate", "20000");
-	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack", "20000");
-	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time", "40000");
-	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration", "40000");
-	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate", "20000");
-	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack", "20000");
-	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time", "40000");
-	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration", "40000");
+	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_rate", "20000");
+	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_slack", "20000");
+	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/cafactive/min_sample_time", "40000");
+	sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse_duration", "40000");
+	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/cafactive/timer_rate", "20000");
+	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/cafactive/timer_slack", "20000");
+	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/cafactive/min_sample_time", "40000");
+	sysfs_write("/sys/devices/system/cpu/cpu4/cpufreq/cafactive/boostpulse_duration", "40000");
 
 	/* use normal profile by default */
 	interactive_set_profile(PROFILE_NORMAL);

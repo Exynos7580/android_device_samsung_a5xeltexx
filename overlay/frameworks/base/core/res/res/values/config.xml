@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
+<<<<<<< HEAD
 ** Copyright 2017, The Android Open Source Project
+=======
+** Copyright 2014, The Android Open Source Project
+>>>>>>> 3c949e0... Move in the few common Stuff back to device Tree
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -93,6 +97,10 @@
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface" translatable="false">rmnet0</string>
+
+    <!-- Power Management: Specifies whether to decouple the 
+	interactive state of the device from the display on/off state. -->
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
 
     <!-- ############################################################## -->
     <!-- ### HARDWARE KEYS                                              -->
@@ -212,6 +220,9 @@
     -->
     <integer name="config_doubleTapOnHomeBehavior">2</integer>
 
+    <!-- Indicates whether round icons should be parsed from the application manifest. -->
+    <bool name="config_useRoundIcon">true</bool>
+
     <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
     <string name="config_radio_access_family">GSM | WCDMA | LTE | CDMA | EVDO</string>
@@ -219,4 +230,7 @@
     <!-- If enabled, capacitive keys will only light up when pressed.
          Otherwise, the buttons will light up whenever the user interacts with the device -->
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
+
+    <!-- Configuartion to support SIM contact batch operation.-->
+    <bool name="config_sim_phonebook_batch_operation">false</bool>    
 </resources>

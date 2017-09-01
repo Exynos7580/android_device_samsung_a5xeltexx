@@ -1,0 +1,34 @@
+# for Wi-Fi only models
+on property:ro.radio.noril=yes
+    stop ril-daemon
+
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    socket rild-cas stream 660  casdrm mmb
+    user root
+#    seclabel u:r:init:s0
+    group radio cache inet misc audio sdcard_r sdcard_rw log vpn system
+    onrestart restart cpboot-daemon
+
+service ril-daemon1 /system/bin/rild -c 2
+    class main
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw log
+#    seclabel u:r:init:s0
+    disabled
+    onrestart restart cpboot-daemon
+
+on property:persist.sys.cpboot=disable
+    stop ril-daemon
+    stop cpboot-daemon
+
+# start multiple rilds based on multisim property
+on property:ro.multisim.simslotcount=2
+    stop ril-daemon
+    start ril-daemon
+    start ril-daemon1
+

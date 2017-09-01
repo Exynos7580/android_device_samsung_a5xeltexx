@@ -1,11 +1,9 @@
-# Audio
-audio_hal.disable_two_mic=true
-
 # Display
-ro.sf.lcd_density=480
-ro.opengles.version=196609
+ro.sf.lcd_density=320
 ro.bq.gpu_to_cpu_unsupported=1
-debug.hwc.force_gpu=1
+
+# Games
+debug.egl.force_msaa=true
 
 # Dalvik/Art
 dalvik.vm.heapstartsize=8m

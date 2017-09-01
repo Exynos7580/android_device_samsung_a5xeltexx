@@ -14,11 +14,11 @@
 
 #
 # This file is the build configuration for a full Android
-# build for a5xeltexx hardware. This cleanly combines a set of
+# build for a3xeltexx hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps). Except for a few implementation
 # details, it only fundamentally contains two inherit-product
-# lines, full and a5xeltexx, hence its name.
+# lines, full and a3xeltexx, hence its name.
 #
 
 PRODUCT_RUNTIMES := runtime_libart_default

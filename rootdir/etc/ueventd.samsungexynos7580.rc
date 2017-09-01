@@ -48,10 +48,10 @@
 /dev/video31              0660   media      graphics
 
 # mscalers
-/dev/video50              0660   media      media
-/dev/video51              0660   media      media
-/dev/m2m1shot_scaler0     0660   media      media
-/dev/m2m1shot_scaler1     0660   media      media
+/dev/video50              0666   media      graphics
+/dev/video51              0666   media      graphics
+/dev/m2m1shot_scaler0     0660   cameraserver      graphics
+/dev/m2m1shot_scaler1     0660   cameraserver      graphics
 
 /dev/video55              0666   system     graphics
 /dev/fimg2d               0666   system     graphics
@@ -59,10 +59,10 @@
 /dev/HPD                  0660   system     system
 
 # mfc
-/dev/video6               0660   media      drmrpc
-/dev/video7               0660   media      media
-/dev/video8               0660   media      media
-/dev/video9               0660   media      media
+/dev/video6               0660   mediacodec      mediadrm
+/dev/video7               0660   media      mediadrm
+/dev/video8               0660   media      mediadrm
+/dev/video9               0660   media      mediadrm
 
 # camera
 /dev/video100             0660   media      media
@@ -119,29 +119,29 @@
 /sys/bus/iio/devices/iio:device*    0664   system     radio
 
 # Dynamic Cluster Hotplug
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/target_loads	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/above_hispeed_delay	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/hispeed_freq	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/go_hispeed_load	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/min_sample_time	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/timer_rate	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/timer_slack	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/boost	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/boostpulse	0200	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/boostpulse_duration	0660	system	system
-/sys/devices/system/cpu/cpu0/cpufreq	interactive/io_is_busy	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/target_loads	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/above_hispeed_delay	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/hispeed_freq	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/go_hispeed_load	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/min_sample_time	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/timer_rate	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/timer_slack	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/boost	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/boostpulse	0200	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/boostpulse_duration	0660	system	system
+/sys/devices/system/cpu/cpu0/cpufreq	cafactive/io_is_busy	0660	system	system
 
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/target_loads	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/above_hispeed_delay	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/hispeed_freq	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/go_hispeed_load	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/min_sample_time	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/timer_rate	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/timer_slack	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/boost	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/boostpulse	0200	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/boostpulse_duration	0660	system	system
-/sys/devices/system/cpu/cpu4/cpufreq	interactive/io_is_busy	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/target_loads	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/above_hispeed_delay	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/hispeed_freq	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/go_hispeed_load	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/min_sample_time	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/timer_rate	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/timer_slack	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/boost	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/boostpulse	0200	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/boostpulse_duration	0660	system	system
+/sys/devices/system/cpu/cpu4/cpufreq	cafactive/io_is_busy	0660	system	system
 
 # Audio NXP AMP
 /dev/i2c-20                0660   system     system

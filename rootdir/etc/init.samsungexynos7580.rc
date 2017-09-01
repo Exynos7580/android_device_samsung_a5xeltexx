@@ -25,12 +25,12 @@ on init
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
 
 on post-fs-data
-    mkdir /cache/logs 0775 system log
-    start persistentLogging
-
     mkdir /data/media 0770 media_rw media_rw
 
     setprop vold.post_fs_data_done 1
+
+# Create camera directory
+    mkdir /data/camera 0770 media system
 
 # Permissions for audio
     chown system radio /sys/class/audio/earjack/select_jack
@@ -55,8 +55,27 @@ on post-fs-data
     chown media system /data/firmware
 
 on boot
+    # Ensure all CPUs are online (big cluster)
+    write /sys/devices/system/cpu/cpu4/online 1
+
+    # Update cpusets now that processors are up
+    write /dev/cpuset/foreground/cpus 0-3,4-7
+    write /dev/cpuset/foreground/mems 0-3,4-7
+    write /dev/cpuset/foreground/boost/cpus 4-7
+    write /dev/cpuset/foreground/boost/mems 4-7
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/background/mems 0
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/system-background/mems 0-3
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/top-app/mems 0-7
+
     # Allow to access debugfs
     chmod 755 /sys/kernel/debug
+
+    # Reset mDNIe mode & scenario
+    write /sys/class/mdnie/mdnie/scenario 0
+    write /sys/class/mdnie/mdnie/mode 0
 
     # Set up kernel tracing, but disable it by default
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -108,30 +127,30 @@ on boot
     # CPU Idle
     chown system system /sys/module/cpuidle_exynos64_smp/parameters/enable_mask
 
-    # Change permission for interactive governor
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    # Change permission for cafactive governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/target_loads
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/input_boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/io_is_busy
 
     chown system log /proc/sec_log
 
@@ -268,7 +287,7 @@ on fs
     mkdir /persdata/absolute 0750 system system
 
     wait /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA
-    check_fs /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA ext4
+    exec /system/bin/e2fsck -p /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA
     mount ext4 /dev/block/platform/13540000.dwmmc0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
     chown system system /persdata
@@ -815,12 +834,6 @@ on fs
     chown system radio /sys/class/sensors/irled_remote/irled_send
     chown system radio /sys/class/sensors/irled_remote/irled_send_result
 
-# Log
-service persistentLogging /system/bin/logcat -r 1024 -n 9 -v threadTime -f /cache/logs/log
-    user system
-    group system log
-    disabled
-
 # GPS
 service gpsd /system/bin/gpsd -c /system/etc/gps.xml
     class main
@@ -843,9 +856,16 @@ on property:sys.boot_completed=1
     write /proc/sys/vm/dirty_bytes 41943040
     write /proc/sys/vm/dirty_background_bytes 20971520
 
-on property:sys.boot_completed=1
-    write /proc/sys/vm/dirty_bytes 31457280
-    write /proc/sys/vm/dirty_background_bytes 15728640
+# Set preferred IO scheduler after boot
+    setprop sys.io.scheduler bfq
+
+# Set best cache size for internal and external storages
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 128
+    write /sys/block/mmcblk1/bdi/read_ahead_kb 2048
+
+# rerun macloader to fix wifi after hotspot
+on property:wlan.driver.status=unloaded
+    start macloader
 
 # Kick watchdogd if debug_level is low
 on property:ro.debug_level=0x4f4c

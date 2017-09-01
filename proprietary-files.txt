@@ -1,5 +1,5 @@
 ### Bluetooth
-vendor/firmware/bcm43454_V0133.0213.hcd
+vendor/firmware/bcm43438A1_V0051.0217.hcd
 
 ### Camera
 cameradata/datapattern_420sp.yuv
@@ -12,6 +12,9 @@ lib/libuniplugin.so
 lib/libsensorlistener.so
 vendor/firmware/setfile_3l2.bin
 vendor/firmware/setfile_5e3.bin
+
+# Gralloc
+lib/hw/gralloc.exynos5.so
 
 ### GPS
 bin/gps.cer
@@ -161,3 +164,5 @@ etc/wifi/bcmdhd_sta.bin
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_net.txt
 
+### Samsung's sswap
+sbin/sswap
