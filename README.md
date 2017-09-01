@@ -1,31 +1,115 @@
-Copyright (C) 2016-2017 Apavayan Sinha <info@apavayan.com>
+#
+# Copyright (C) 2016 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
+LOCAL_PATH := device/samsung/a5xeltexx
 
-      http://www.apache.org/licenses/LICENSE-2.0
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += device/samsung/a5xeltexx/overlay
 
-**Notice:** This is **Work In Progress** so it might not work
+# Device uses high-density artwork where available
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
 
-Device Tree For Samsung Galaxy A3 (2016)
-=====================================
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1980
+TARGET_SCREEN_WIDTH := 1080
 
-Basic   | Spec Sheet
--------:|:-------------------------
-CPU     | Qcta 1.6 GHz Cortex-A53
-CHIPSET | Samsung Exynos 7580
-GPU     | Mali-T720MP2
-Memory  | 1.5GB RAM
-Android | 5.1.1/6.0.1/7.0
-Storage | 16 GB
-MicroSD | Up to 128GB
-Battery | 2300 mAh
-Display | 4,7"
-Rear Camera  | 13 MP, f/1.9, 31mm, 1080p@30fps, autofocus, LED flash
-Front Camera  | 5 MP, f/1.9, 23mm
+# Audio
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
-![Galaxy A3 (2016)](http://drop.ndtv.com/TECH/product_database/images/1232015120413AM_635_samsung_galaxy_a3_2016.jpeg "Galaxy A3 (2016)")
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
-Model Supported : SM-A310F SM-A310M
+# GPS
+PRODUCT_PACKAGES += \
+    libdmitry
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
+
+# Permissions
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
+    frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+
+# Lights
+PRODUCT_PACKAGES += \
+    lights.universal7580
+
+# Media profile
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
+
+# Power
+PRODUCT_PACKAGES += \
+    power.universal7580
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.samsungexynos7580 \
+    init.baseband.rc \
+    init.rilcommon.rc \
+    init.samsungexynos7580.rc \
+    init.samsungexynos7580.usb.rc \
+    init.wifi.rc \
+    ueventd.samsungexynos7580.rc
+
+# NFC
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
+    $(LOCAL_PATH)/configs/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
+
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.nfc.sec_hal=true
+
+# Wi-fi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/cred.conf:system/etc/wifi/cred.conf \
+    $(LOCAL_PATH)/configs/wifi/olsrd.conf:system/etc/wifi/olsrd.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
+# SYMBOLS FOR BLOBS
+PRODUCT_PACKAGES += \
+    libsamsung_symbols
+
+# cpboot-daemon for modem
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/ril/sbin/cbd:root/sbin/cbd
+
+# Inherit from Exynos7580-common
+$(call inherit-product, device/samsung/exynos7580-common/device-common.mk)
+
+# Get non-open-source specific aspects
+$(call inherit-product-if-exists, vendor/samsung/a5xeltexx/a5xeltexx-vendor.mk)
