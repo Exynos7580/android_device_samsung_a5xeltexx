@@ -24,6 +24,21 @@ on init
     symlink /data/app /factory
     symlink /dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT /dev/block/persistent
 
+    # Create cgroup mount points for process groups
+    mkdir /dev/cpuctl
+    mount cgroup none /dev/cpuctl cpu
+    chown system system /dev/cpuctl
+    chmod 0660 /dev/cpuctl
+    chown system system /dev/cpuctl/tasks
+    chmod 0666 /dev/cpuctl/tasks
+    write /dev/cpuctl/cpu.shares 1024
+    write /dev/cpuctl/cpu.rt_runtime_us 1000000
+    write /dev/cpuctl/cpu.rt_period_us 950000
+
+    mkdir /dev/cpuctl/bg_non_interactive
+    chown system system /dev/cpuctl/bg_non_interactive/tasks
+    chmod 0666 /dev/cpuctl/bg_non_interactive/tasks
+
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
 
@@ -32,19 +47,18 @@ on post-fs-data
 # Create camera directory
     mkdir /data/camera 0770 media system
 
+# Create power directory
+    mkdir /data/power 0771 system system
+
+# Permission for System LSI NFC
+    chmod 0660 /dev/sec-nfc
+    chmod nfc nfc /dev/sec-nfc
+
 # Permissions for audio
     chown system radio /sys/class/audio/earjack/select_jack
     chown system radio /sys/class/audio/earjack/key_state
     chown system radio /sys/class/audio/earjack/state
     chown system radio /sys/class/audio/earjack/mic_adc
-
-# Fingerprint
-    mkdir /dev/validity 0770 system system
-
-# Fingerprint_sensor
-    chown system radio /sys/class/fingerprint/fingerprint/type_check
-    chown system radio /sys/class/fingerprint/fingerprint/name
-    chown system radio /sys/class/fingerprint/fingerprint/vendor
 
 # Permissions for dbmd2
     chown system audio /sys/class/voice_trigger/dbd2/vqe_use_case
@@ -135,30 +149,55 @@ on boot
     # CPU Idle
     chown system system /sys/module/cpuidle_exynos64_smp/parameters/enable_mask
 
-    # Change permission for cafactive governor
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_rate
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_slack
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/timer_slack
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/min_sample_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/hispeed_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/target_loads
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/target_loads
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/go_hispeed_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/above_hispeed_delay
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/input_boost
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/input_boost
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse_duration
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/io_is_busy
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/io_is_busy
+    # Change permission for interactive governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/input_boost
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
+    
+    # Change permission for interactive governor second cluster
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/input_boost
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/input_boost
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
 
     chown system log /proc/sec_log
 
@@ -855,12 +894,6 @@ service watchdogd /sbin/watchdogd 10 20
     seclabel u:r:watchdogd:s0
     disabled
 
-# FINGERPRINT FRAMEWORK : starts fingerprintd
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    group system
-
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
     write /sys/module/kgdboc/parameters/kgdboc ttyFIQ1
@@ -871,10 +904,10 @@ on property:sys.boot_completed=1
     write /proc/sys/vm/dirty_background_bytes 20971520
 
 # Set preferred IO scheduler after boot
-    setprop sys.io.scheduler bfq
+    setprop sys.io.scheduler cfq
 
 # Set best cache size for internal and external storages
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 128
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 256
     write /sys/block/mmcblk1/bdi/read_ahead_kb 2048
 
 # rerun macloader to fix wifi after hotspot
@@ -925,7 +958,7 @@ on property:sys.mobicoredaemon.enable=true
     start cs_service
     write /proc/iccc_ready 1
 
-service sswap /sbin/sswap -s
+service sswap /system/bin/sswap -s
       class core
       user root
       group root

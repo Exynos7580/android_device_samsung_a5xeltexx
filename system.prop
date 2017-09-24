@@ -1,6 +1,6 @@
 # Display
-ro.sf.lcd_density=320
-ro.bq.gpu_to_cpu_unsupported=1
+ro.sf.lcd_density=480
+#ro.bq.gpu_to_cpu_unsupported=1
 
 # Games
 debug.egl.force_msaa=true
@@ -45,3 +45,6 @@ persist.data.netmgrd.qos.enable=false
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 ro.smps.enable=true
+
+# Sdcardfs
+ro.sys.sdcardfs=true

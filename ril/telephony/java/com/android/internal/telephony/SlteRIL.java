@@ -47,9 +47,8 @@ public class SlteRIL extends RIL {
     static final boolean RILJ_LOGV = true;
 
     private static final int RIL_REQUEST_DIAL_EMERGENCY_CALL = 10001;
-    private static final int RIL_UNSOL_STK_SEND_SMS_RESULT = 11002;
     private static final int RIL_UNSOL_STK_CALL_CONTROL_RESULT = 11003;
-
+    private static final int RIL_UNSOL_GPS_NOTI = 11009;
     private static final int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
     private static final int RIL_UNSOL_AM = 11010;
     private static final int RIL_UNSOL_SIM_PB_READY = 11021;
@@ -178,6 +177,87 @@ public class SlteRIL extends RIL {
         send(rr);
     }
 
+
+    @Override
+    protected Object
+    responseCallList(Parcel p) {
+        int num;
+        int voiceSettings;
+        ArrayList<DriverCall> response;
+        DriverCall dc;
+
+        num = p.readInt();
+        response = new ArrayList<DriverCall>(num);
+
+        if (RILJ_LOGV) {
+            riljLog("responseCallList: num=" + num +
+                    " mEmergencyCallbackModeRegistrant=" + mEmergencyCallbackModeRegistrant +
+                    " mTestingEmergencyCall=" + mTestingEmergencyCall.get());
+        }
+        for (int i = 0 ; i < num ; i++) {
+            dc = new DriverCall();
+
+            dc.state = DriverCall.stateFromCLCC(p.readInt());
+            dc.index = p.readInt() & 0xff;
+            dc.TOA = p.readInt();
+            dc.isMpty = (0 != p.readInt());
+            dc.isMT = (0 != p.readInt());
+            dc.als = p.readInt();
+            voiceSettings = p.readInt();
+            dc.isVoice = (0 == voiceSettings) ? false : true;
+            dc.isVoicePrivacy = (0 != p.readInt());
+            dc.number = p.readString();
+            int np = p.readInt();
+            dc.numberPresentation = DriverCall.presentationFromCLIP(np);
+            dc.name = p.readString();
+            // according to ril.h, namePresentation should be handled as numberPresentation;
+            dc.namePresentation = DriverCall.presentationFromCLIP(p.readInt());
+            int uusInfoPresent = p.readInt();
+            if (uusInfoPresent == 1) {
+                dc.uusInfo = new UUSInfo();
+                dc.uusInfo.setType(p.readInt());
+                dc.uusInfo.setDcs(p.readInt());
+                byte[] userData = p.createByteArray();
+                dc.uusInfo.setUserData(userData);
+                riljLogv(String.format("Incoming UUS : type=%d, dcs=%d, length=%d",
+                                dc.uusInfo.getType(), dc.uusInfo.getDcs(),
+                                dc.uusInfo.getUserData().length));
+                riljLogv("Incoming UUS : data (string)="
+                        + new String(dc.uusInfo.getUserData()));
+                riljLogv("Incoming UUS : data (hex): "
+                        + IccUtils.bytesToHexString(dc.uusInfo.getUserData()));
+            } else {
+                riljLogv("Incoming UUS : NOT present!");
+            }
+
+            // Make sure there's a leading + on addresses with a TOA of 145
+            dc.number = PhoneNumberUtils.stringFromStringAndTOA(dc.number, dc.TOA);
+
+            response.add(dc);
+
+            if (dc.isVoicePrivacy) {
+                mVoicePrivacyOnRegistrants.notifyRegistrants();
+                riljLog("InCall VoicePrivacy is enabled");
+            } else {
+                mVoicePrivacyOffRegistrants.notifyRegistrants();
+                riljLog("InCall VoicePrivacy is disabled");
+            }
+        }
+
+        Collections.sort(response);
+
+        if ((num == 0) && mTestingEmergencyCall.getAndSet(false)) {
+            if (mEmergencyCallbackModeRegistrant != null) {
+                riljLog("responseCallList: call ended, testing emergency call," +
+                            " notify ECM Registrants");
+                mEmergencyCallbackModeRegistrant.notifyRegistrant();
+            }
+        }
+
+        return response;
+    }
+
+
     @Override
     protected Object
     responseIccCardStatus(Parcel p) {
@@ -257,22 +337,6 @@ public class SlteRIL extends RIL {
         rr.mParcel.writeString(pdu);
     }
 
-    /**
-     * The RIL can't handle the RIL_REQUEST_SEND_SMS_EXPECT_MORE
-     * request properly, so we use RIL_REQUEST_SEND_SMS instead.
-     */
-    @Override
-    public void sendSMSExpectMore(String smscPDU, String pdu, Message result) {
-        Rlog.v(RILJ_LOG_TAG, "XMM7260: sendSMSExpectMore");
-        
-        RILRequest rr = RILRequest.obtain(RIL_REQUEST_SEND_SMS, result);
-        constructGsmSendSmsRilRequest(rr, smscPDU, pdu);
-        
-        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
-        
-        send(rr);
-    }
-
     // This method is used in the search network functionality.
     // See mobile network setting -> network operators
     @Override
@@ -320,7 +384,7 @@ public class SlteRIL extends RIL {
         switch (origResponse) {
             case 1041: //RIL_UNSOL_DC_RT_INFO_CHANGED
             case RIL_UNSOL_STK_CALL_CONTROL_RESULT:
-            case RIL_UNSOL_WB_AMR_STATE:
+            case RIL_UNSOL_GPS_NOTI:
             case RIL_UNSOL_DEVICE_READY_NOTI: /* Registrant notification */
             case RIL_UNSOL_SIM_PB_READY: /* Registrant notification */
                 Rlog.v(RILJ_LOG_TAG,
@@ -340,8 +404,11 @@ public class SlteRIL extends RIL {
             case RIL_UNSOL_AM:
                 ret = responseString(p);
                 break;
-            case RIL_UNSOL_STK_SEND_SMS_RESULT:
+            case RIL_UNSOL_WB_AMR_STATE:
                 ret = responseInts(p);
+                break;
+            case RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED:
+                ret = responseVoid(p);
                 break;
             default:
                 // Rewind the Parcel

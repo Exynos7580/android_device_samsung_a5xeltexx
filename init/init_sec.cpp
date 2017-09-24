@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2016, The CyanogenMod Project. All rights reserved.
+   Copyright (c) 2015, The Dokdo Project. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -27,17 +27,20 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
    File Name : init_sec.c
-   Create Date : 2016.04.13
+   Create Date : 2015.11.03
+   Author : Sunghun Ra
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#include "vendor_init.h"
-#include "property_service.h"
 #include "log.h"
+#include "property_service.h"
 #include "util.h"
+#include "vendor_init.h"
+
+#include "init_sec.h"
 
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
@@ -53,10 +56,13 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
+std::string bootloader;
+std::string device;
+char* devicename;
 
-void set_sim_info ()
+device_variant check_device_and_get_variant()
 {
-	FILE *file;
+    FILE *file;
 	char *simslot_count_path = "/proc/simslot_count";
 	char simslot_count[2] = "\0";
 	
@@ -65,45 +71,77 @@ void set_sim_info ()
 	if (file != NULL) {
 		simslot_count[0] = fgetc(file);
 		property_set("ro.multisim.simslotcount", simslot_count);
+        
 		if(strcmp(simslot_count, "2") == 0) {
 			property_set("rild.libpath2", "/system/lib/libsec-ril-dsds.so");
 			property_set("persist.radio.multisim.config", "dsds");
 		}
+        
 		fclose(file);
-	}
-	else {
+	} else {
 		ERROR("Could not open '%s'\n", simslot_count_path);
 	}
+    
+    std::string platform = property_get("ro.board.platform");
+    if (platform != ANDROID_TARGET) {
+        return UNKNOWN;
+    }
+
+    bootloader = property_get("ro.bootloader");
+    return match(bootloader);
 }
 
 void vendor_load_properties()
 {
+    device_variant variant = check_device_and_get_variant();
 
-    std::string bootloader = property_get("ro.bootloader");
-
-    if (bootloader.find("A510F") != std::string::npos) {
-	/* SM-A510F */
-        property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FDXXS2APD1:user/release-keys");
-        property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FDXXS2APD1 release-keys");
-        property_set("ro.product.model", "SM-A510F");
-        property_set("ro.product.device", "a5xelte");
-    } else if (bootloader.find("A510M") != std::string::npos) {
-	/* SM-A510M */
-        property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:5.1.1/LMY47X/A510FXXS2APD1:user/release-keys");
-        property_set("ro.build.description", "a5xeltexx-user 5.1.1 LMY47X A510FXXS2APD1 release-keys");
-        property_set("ro.product.model", "SM-A510M");
-        property_set("ro.product.device", "a5xelte");
-    } else {
-	/* SM-A510Y */
-        property_set("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:5.1.1/LMY47X/A510MUBS1APC1:user/release-keys");
-        property_set("ro.build.description", "a5xelteub-user 5.1.1 LMY47X A510MUBS1APC1 release-keys");
-        property_set("ro.product.model", "SM-A510Y");
-        property_set("ro.product.device", "a5xelte");
+    switch (variant) {
+        case A510F:
+            /* a510f */
+            property_set("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:7.0/NRD90M/A510FXXS4CQH4:user/release-keys");
+            property_set("ro.build.description", "a5xeltexx-user 7.0 NRD90M A510FXXS4CQH4 release-keys");
+            property_set("ro.product.model", "SM-A510F");
+            property_set("ro.product.device", "a5xelte");
+            break;
+        case A510M:
+            /* a510m */
+            property_set("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:7.0/NRD90M/A510MUBS3CQH1:user/release-keys");
+            property_set("ro.build.description", "a5xelteub-user 7.0 NRD90M A510MUBS3CQH1 release-keys");
+            property_set("ro.product.model", "SM-A510M");
+            property_set("ro.product.device", "a5xelte");
+            break;
+        case A510Y:
+            /* a510y */
+            property_set("ro.build.fingerprint", "samsung/a5xeltedo/a5xelte:7.0/NRD90M/A510YDOS4CQF1:user/release-keys");
+            property_set("ro.build.description", "a5xeltedo-user 7.0 NRD90M A510YDOS4CQF1 release-keys");
+            property_set("ro.product.model", "SM-A510Y");
+            property_set("ro.product.device", "a5xelte");
+            break;
+        case A510S:
+            /* a510s */
+            property_set("ro.build.fingerprint", "samsung/a5xelteskt/a5xelteskt:7.0/NRD90M/A510SKSU1CQF2:user/release-keys");
+            property_set("ro.build.description", "a5xelteskt-user 7.0 NRD90M A510SKSU1CQF2 release-keys");
+            property_set("ro.product.model", "SM-A510S");
+            property_set("ro.product.device", "a5xelteskt");
+            break;
+        case A510K:
+            /* a510k */
+            property_set("ro.build.fingerprint", "samsung/a5xeltektt/a5xeltektt:7.0/NRD90M/A510KKKU1CQF2:user/release-keys");
+            property_set("ro.build.description", "a5xeltektt-user 7.0 NRD90M A510KKKU1CQF2 release-keys");
+            property_set("ro.product.model", "SM-A510K");
+            property_set("ro.product.device", "a5xeltektt");
+            break;
+        case A510L:
+            /* a510l */
+            property_set("ro.build.fingerprint", "samsung/a5xeltelgt/a5xeltelgt:7.0/NRD90M/A510LKLU1CQF2:user/release-keys");
+            property_set("ro.build.description", "a5xeltelgt-user 7.0 NRD90M A510LKLU1CQF2 release-keys");
+            property_set("ro.product.model", "SM-A510L");
+            property_set("ro.product.device", "a5xeltelgt");
+            break;
+        default:
+            ERROR("Unknown bootloader id %s detected. bailing...\n", bootloader.c_str());
+            return;
     }
-
-	set_sim_info();
-
-	std::string device = property_get("ro.product.device");
-	std::string devicename = property_get("ro.product.model");
-	ERROR("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), devicename.c_str());
+    device = property_get("ro.product.device");
+    INFO("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), device.c_str());
 }

@@ -26,16 +26,6 @@
 <resources>
     <!-- Boolean indicddating if restoring network selection should be skipped -->
     <!-- The restoring is handled by modem if it is true -->
-    <bool name="skip_restoring_network_selection">true</bool>
-
-    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
-         it causes the device to wake up.
-         The default is false. -->
-    <bool name="config_lidControlsSleep">true</bool>
-
-    <!-- Flag specifying whether VoLTE TTY is supported -->
-    <bool name="config_carrier_volte_tty_supported">true</bool>
-
     <!-- TCP Buffers -->
     <string-array name="config_mobile_tcp_buffers">
         <item>lte:1048576,3145728,4194304,524288,1572864,2097152</item>
@@ -139,8 +129,6 @@
          when adapting to brighter or darker environments.  This parameter controls how quickly
          brightness changes occur in response to an observed change in light level that exceeds the
          hysteresis threshold. -->
-    <integer name="config_autoBrightnessBrighteningLightDebounce">0</integer>
-    <integer name="config_autoBrightnessDarkeningLightDebounce">0</integer>
 
     <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
          The N entries of this array define N  1 zones as follows:
@@ -232,8 +220,39 @@
     <bool name="config_buttonLightOnKeypressOnly">true</bool>
 
     <!-- Configuartion to support SIM contact batch operation.-->
-    <bool name="config_sim_phonebook_batch_operation">false</bool>
+    <bool name="config_sim_phonebook_batch_operation">false</bool>    
 
-    <!-- For performance and storage reasons, limit the number of fingerprints per user -->
-    <integer name="config_fingerprintMaxTemplatesPerUser">4</integer> 
+    <!-- Control the behavior when the user short presses the power button.
+         0 - Nothing
+         1 - Go to sleep (doze)
+         2 - Really go to sleep (don't doze)
+         3 - Really go to sleep and go home (don't doze)
+    -->
+    <integer name="config_shortPressOnPowerBehavior">1</integer>
+
+    <!-- Boolean to enable stk functionality on Samsung phones -->
+    <bool name="config_samsung_stk">true</bool>
+
+    <!-- Doze (Ambient display) -->
+    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+
+    <!-- Permit doze mode to operate -->
+    <bool name="config_enableAutoPowerModes">true</bool>
+
+    <!-- Power Management: Specifies whether to decouple the interactive state of the
+         device from the display on/off state. -->
+    <bool name="config_powerDecoupleInteractiveModeFromDisplay">false</bool>
+
+    <!-- Allow screen mirroring/miracast -->
+    <bool name="config_enableWifiDisplay">true</bool>
+    
+    <!-- Our gralloc has support for protected buffers -->
+    <bool name="config_wifiDisplaySupportsProtectedBuffers">true</bool>
+
+    <!-- The device supports freeform window management -->
+    <bool name="config_freeformWindowManagement">true</bool>
+
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">true</bool>
+
 </resources>

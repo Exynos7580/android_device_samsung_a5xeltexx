@@ -100,63 +100,63 @@ on boot
     chown radio system /efs/bluetooth
     chmod 0775 /efs/bluetooth
 
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_enter_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_enter_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_exit_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_exit_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_enter_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_enter_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_exit_load
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_exit_time
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/mode
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/mode
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/enforced_mode
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/enforced_mode
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/param_index
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/param_index
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/cpu_util
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/cpu_util
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_cluster0_min_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/multi_cluster0_min_freq
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_cluster0_min_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/cafactive/single_cluster0_min_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_enter_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_exit_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_enter_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_load
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_exit_time
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/enforced_mode
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/param_index
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/cpu_util
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_cluster0_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/multi_cluster0_min_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_cluster0_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/interactive/single_cluster0_min_freq
 
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_enter_load
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_enter_time
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_exit_load
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_exit_time
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_enter_load
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_enter_load
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_enter_time
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_enter_time
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_exit_load
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_exit_load
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_exit_time
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_exit_time
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/mode
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/mode
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/enforced_mode
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/enforced_mode
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/param_index
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/param_index
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/cpu_util
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/cpu_util
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_cluster0_min_freq
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/multi_cluster0_min_freq
-    chown system system /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_cluster0_min_freq
-    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/cafactive/single_cluster0_min_freq
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_enter_load
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_enter_time
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_exit_load
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_exit_time
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_enter_load
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_enter_load
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_enter_time
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_enter_time
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_exit_load
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_exit_load
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_exit_time
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_exit_time
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/enforced_mode
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/enforced_mode
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/param_index
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/param_index
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/cpu_util
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/cpu_util
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_cluster0_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/multi_cluster0_min_freq
+    chown system system /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_cluster0_min_freq
+    chmod 0660 /sys/devices/system/cpu/cpu4/cpufreq/interactive/single_cluster0_min_freq
 
 
     # Change permission for dvfshelper

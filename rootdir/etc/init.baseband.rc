@@ -54,7 +54,7 @@ on property:sys.boot_completed=1
     symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
     symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
 
-service cpboot-daemon /sbin/cbd -d -tss310 -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
+service cpboot-daemon /system/bin/cbd -d -tss310 -bm -mm -P platform/13540000.dwmmc0/by-name/RADIO
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
