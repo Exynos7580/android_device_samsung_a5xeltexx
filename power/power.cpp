@@ -92,11 +92,8 @@ static int power_open(const hw_module_t __unused * module, const char *name, hw_
 }
 
 static void power_init(struct power_module __unused * module) {
-	/*
 	if (!is_file(POWER_CONFIG_ALWAYS_ON_FP))
 		pfwrite(POWER_CONFIG_ALWAYS_ON_FP, false);
-
-	*/
 
 	if (!is_file(POWER_CONFIG_DT2W))
 		pfwrite(POWER_CONFIG_DT2W, false);
@@ -283,17 +280,17 @@ static void power_boostpulse(int duration) {
  */
 static void power_input_device_state(int state) {
 	int dt2w = 0, dt2w_sysfs = 0;
-	//int always_on_fp = 0;
+	int always_on_fp = 0;
 
 	pfread(POWER_CONFIG_DT2W, &dt2w);
 	pfread(POWER_DT2W_ENABLED, &dt2w_sysfs);
-	//pfread(POWER_CONFIG_ALWAYS_ON_FP, &always_on_fp);
+	pfread(POWER_CONFIG_ALWAYS_ON_FP, &always_on_fp);
 
 #if LOG_NDEBUG
 	ALOGD("%s: state         = %d", __func__, state);
 	ALOGD("%s: dt2w          = %d", __func__, dt2w);
 	ALOGD("%s: dt2w_sysfs    = %d", __func__, dt2w_sysfs);
-	//ALOGD("%s: always_on_fp  = %d", __func__, always_on_fp);
+	ALOGD("%s: always_on_fp  = %d", __func__, always_on_fp);
 #endif
 
 	switch (state) {
@@ -306,19 +303,18 @@ static void power_input_device_state(int state) {
 			pfwrite(POWER_TOUCHKEYS_ENABLED, false);
 			pfwrite(POWER_TOUCHKEYS_BRIGTHNESS, 0);
 
-			/*
 			if (always_on_fp) {
 				pfwrite(POWER_FINGERPRINT_ENABLED, true);
 			} else {
 				pfwrite(POWER_FINGERPRINT_ENABLED, false);
-			}*/
+			}
 
 			break;
 
 		case INPUT_STATE_ENABLE:
 
 			pfwrite(POWER_TOUCHSCREEN_ENABLED, true);
-			//pfwrite(POWER_FINGERPRINT_ENABLED, true);
+			pfwrite(POWER_FINGERPRINT_ENABLED, true);
 
 			if (input_state_touchkeys) {
 				pfwrite(POWER_TOUCHKEYS_ENABLED, true);
