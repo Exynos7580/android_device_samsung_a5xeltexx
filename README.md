@@ -1,5 +1,7 @@
 Copyright (C) 2016-2017 Apavayan Sinha <info@apavayan.com>
-Copyright (C) 2017-2018 Jan Altensen <info@strited.net>
+<br>
+Copyright (C) 2017-2018 Jan Altensen <info@stricted.net>
+<br>
 Copyright (C) 2018 Victor Lourme <victorlourme@vlour.me>
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,4 +31,4 @@ Rear Camera  | 13 MP, f/1.9, 28mm, autofocus, LED flash
 
 This branch is for building LineageOS 15.1
 
-Model Supported : SM-A510F SM-A510M SM-A510Y SM-A510K SM-A510L SM-5108
+Model Supported : SM-A510F SM-A510M SM-A510Y
