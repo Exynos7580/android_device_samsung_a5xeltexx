@@ -14,22 +14,22 @@
 
 #
 # This file is the build configuration for a full Android
-# build for s5neoltexx hardware. This cleanly combines a set of
+# build for a5xeltexx hardware. This cleanly combines a set of
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps). Except for a few implementation
 # details, it only fundamentally contains two inherit-product
-# lines, full and s5neoltexx, hence its name.
+# lines, full and a5xeltexx, hence its name.
 #
 
 PRODUCT_RUNTIMES := runtime_libart_default
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, device/samsung/s5neoltexx/device.mk)
+$(call inherit-product, device/samsung/a5xeltexx/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := s5neoltexx
-PRODUCT_DEVICE := s5neolte
+PRODUCT_NAME := a5xeltexx
+PRODUCT_DEVICE := a5xelte
 PRODUCT_BRAND := Samsung
 PRODUCT_MANUFACTURER := samsung
-PRODUCT_MODEL := SM-G903F
+PRODUCT_MODEL := SM-A510F

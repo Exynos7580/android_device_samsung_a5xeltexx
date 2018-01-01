@@ -84,29 +84,33 @@ void vendor_load_properties()
 	if (platform != ANDROID_TARGET)
 		return;
 
-	if (bootloader.find("G903F") != std::string::npos) {
-		/* SM-G903F */
-		property_override("ro.build.fingerprint", "samsung/s5neoltexx/s5neolte:6.0.1/MMB29K/G903FXXU1BQC1:user/release-keys");
-		property_override("ro.build.description", "s5neoltexx-user 6.0.1 MMB29K G903FXXU1BQC1 release-keys");
-		property_override("ro.product.model", "SM-G903F");
-		property_override("ro.product.device", "s5neolte");
-		property_override("ro.product.name", "s5neoltexx");
-	}
-	else if (bootloader.find("G903M") != std::string::npos) {
-		/* SM-G903M */
-		property_override("ro.build.fingerprint", "samsung/s5neolteub/s5neolte:6.0.1/MMB29K/G903MUBU1BPD3:user/release-keys");
-		property_override("ro.build.description", "s5neolteub-user 6.0.1 MMB29K G903MUBU1BPD3 release-keys");
-		property_override("ro.product.model", "SM-G903M");
-		property_override("ro.product.device", "s5neolte");
-		property_override("ro.product.name", "s5neolteub");
-	}
-	else {
-		/* SM-G903W */
-		property_override("ro.build.fingerprint", "samsung/s5neoltevl/s5neoltecan:6.0.1/MMB29K/G903WVLU1BQA1:user/release-keys");
-		property_override("ro.build.description", "s5neoltevl-user 6.0.1 MMB29K G903WVLU1BQA1 release-keys");
-		property_override("ro.product.model", "SM-G903W");
-		property_override("ro.product.device", "s5neoltecan");
-		property_override("ro.product.name", "s5neoltevl");
+	if (bootloader.find("A510F") != std::string::npos) {
+
+		/* SM-A510F */
+		property_override("ro.build.fingerprint", "samsung/a5xeltexx/a5xelte:7.0/NRD90M/A510FXXS4CQL6:user/release-keys");
+		property_override("ro.build.description", "a5xeltexx-user 7.0 NRD90M A510FXXS4CQL6 release-keys");
+		property_override("ro.product.model", "SM-A510F");
+		property_override("ro.product.device", "a5xelte");
+		property_override("ro.product.name", "a5xeltexx");
+	
+	} else if (bootloader.find("A510M") != std::string::npos) {
+
+		/* SM-A510M */
+		property_override("ro.build.fingerprint", "samsung/a5xelteub/a5xelte:7.0/NRD90M/A510MUBS3CQK2:user/release-keys");
+		property_override("ro.build.description", "a5xelteub-user 7.0 NRD90M A510MUBS3CQK2 release-keys");
+		property_override("ro.product.model", "SM-A510M");
+		property_override("ro.product.device", "a5xelte");
+		property_override("ro.product.name", "a5xelteub");
+
+	} else {
+	
+		/* SM-A510Y */
+		property_override("ro.build.fingerprint", "samsung/a5xeltedo/a5xelte:7.0/NRD90M/A510YDOU4CQK3:user/release-keys");
+		property_override("ro.build.description", "a5xeltedo-user 7.0 NRD90M A510YDOU4CQK3 release-keys");
+		property_override("ro.product.model", "SM-A510Y");
+		property_override("ro.product.device", "a5xelte");
+		property_override("ro.product.name", "a5xeltedo");
+
 	}
 
 	set_sim_info();

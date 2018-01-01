@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/s5neoltexx
+LOCAL_PATH := device/samsung/a5xeltexx
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -26,4 +26,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, device/samsung/exynos7580-common/device-common.mk)
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/samsung/s5neoltexx/s5neoltexx-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/a5xeltexx/a5xeltexx-vendor.mk)

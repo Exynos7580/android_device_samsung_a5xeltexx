@@ -1,2 +1,2 @@
-add_lunch_combo lineage_s5neoltexx-eng
-add_lunch_combo lineage_s5neoltexx-userdebug
+add_lunch_combo lineage_a5xeltexx-eng
+add_lunch_combo lineage_a5xeltexx-userdebug

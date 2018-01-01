@@ -18,7 +18,7 @@
 LOCAL_PATH := $(call my-dir)
 SAM_ROOT := hardware/samsung
 
-ifneq ($(filter s5neoltexx,$(TARGET_DEVICE)),)
+ifneq ($(filter a5xeltexx,$(TARGET_DEVICE)),)
 
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 

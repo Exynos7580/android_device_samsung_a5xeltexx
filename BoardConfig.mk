@@ -17,12 +17,12 @@
 # Inherit from Exynos7580-common
 include device/samsung/exynos7580-common/BoardConfigCommon.mk
 
-TARGET_OTA_ASSERT_DEVICE := s5neo3g,s5neo3gxx,s5neolte,s5neoltexx
+TARGET_OTA_ASSERT_DEVICE := a5xelte, a5xeltexx
 
-DEVICE_PATH := device/samsung/s5neoltexx
+DEVICE_PATH := device/samsung/a5xeltexx
 
 # Include makefiles from board folder
 -include $(DEVICE_PATH)/board/*.mk
 
 # inherit from the proprietary version
--include vendor/samsung/s5neoltexx/BoardConfigVendor.mk
+-include vendor/samsung/a5xeltexx/BoardConfigVendor.mk

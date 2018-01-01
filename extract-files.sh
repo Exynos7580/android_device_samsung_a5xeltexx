@@ -3,7 +3,7 @@
 set -e
 
 VENDOR=samsung
-DEVICE=s5neoltexx
+DEVICE=a5xeltexx
 
 function extract() {
     for FILE in `egrep -v '(^#|^$)' $1`; do
