@@ -5,9 +5,6 @@
 # Ramdisk Init
 #
 
-# Dual-SIM Support
-import /vendor/etc/init/rild-dsds.rc
-
 # Radio daemon for SIM 1
 service ril-daemon /vendor/bin/hw/rild -c 1 -l /system/lib/libsec-ril.so
     class main
