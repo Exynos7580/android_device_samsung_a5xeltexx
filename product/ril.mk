@@ -1,7 +1,15 @@
-# Ril
+# RIL
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     modemloader \
+    libxml2 \
+    rild \
+    libril \
+    libreference-ril \
+    libsecril-client \
+    libsecril-client-sap \
+    android.hardware.radio@1.0 \
+    android.hardware.radio.deprecated@1.0
 
 # cpboot-daemon for modem
 PRODUCT_COPY_FILES += \
