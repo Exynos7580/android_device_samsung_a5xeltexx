@@ -29,7 +29,7 @@ import org.lineageos.internal.util.FileUtils;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/sys/class/sec/sec_touchkey/input/enabled";
+    private static String CONTROL_PATH = "/sys/class/input/input8/enabled";
 
     public static boolean isSupported() {
         return FileUtils.isFileWritable(CONTROL_PATH);

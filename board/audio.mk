@@ -1,1 +1,0 @@
-#TARGET_AUDIOHAL_VARIANT := samsung

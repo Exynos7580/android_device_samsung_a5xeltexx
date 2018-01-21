@@ -1,8 +1,8 @@
 # Display
 ro.sf.lcd_density=480
-ro.opengles.version=196610
+
+# Surface
 ro.bq.gpu_to_cpu_unsupported=1
-debug.hwc.force_gpu=1
 
 # Games
 debug.egl.force_msaa=true
@@ -47,9 +47,6 @@ ro.use_data_netmgrd=false
 ro.telephony.get_imsi_from_sim=true
 ro.ril.force_eri_from_xml=true
 
-# Wi-Fi Tethering
-net.tethering.noprovisioning=true
-
 # Network
 # Define default initial receive window size in segments.
 net.tcp.default_init_rwnd=60
@@ -60,6 +57,14 @@ ro.sys.sdcardfs=true
 # Allows healthd to boot directly from charger mode rather than initiating a reboot.
 ro.enable_boot_charger_mode=1
 
+# Battery Tweaks
+power.saving.mode=1
+ro.ril.disable.power.collapse=0
+ro.ril.power_collapse=1
+power_supply.wakeup=enable
 
 # Default OMX service to non-Treble
 persist.media.treble_omx=false
+
+# Factory Reset Protection
+ro.frp.pst=/dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT

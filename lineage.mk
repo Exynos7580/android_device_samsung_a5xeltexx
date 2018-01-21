@@ -24,6 +24,6 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := lineage_a5xeltexx
 PRODUCT_DEVICE := a5xeltexx
-PRODUCT_MODEL := SM-A310F
+PRODUCT_MODEL := SM-A510F
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung

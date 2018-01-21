@@ -20,7 +20,7 @@ LOCAL_PATH := device/samsung/a5xeltexx
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit board specific products
--include $(LOCAL_PATH)/product/*.mk
+-include $(LOCAL_PATH)/configs/product/*.mk
 
 # Inherit from Exynos7580-common
 $(call inherit-product, device/samsung/exynos7580-common/device-common.mk)

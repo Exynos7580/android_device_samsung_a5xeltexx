@@ -23,8 +23,8 @@
 #define SOUND_CARD 0
 
 /* Playback */
-#define SOUND_DEEP_BUFFER_DEVICE 1
-#define SOUND_PLAYBACK_DEVICE 0
+#define SOUND_DEEP_BUFFER_DEVICE 6
+#define SOUND_PLAYBACK_DEVICE 5
 #define SOUND_PLAYBACK_SCO_DEVICE 3
 
 /* Capture */
