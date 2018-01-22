@@ -924,7 +924,7 @@ service sswap /sbin/sswap -s -f 1024
       seclabel u:r:sswap:s0
 
 # MobiCore startup
-service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin
+service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin -r /system/app/mcRegistry/ffffffffd0000000000000000000001c.tlbin
     class core
     user system
     group system
