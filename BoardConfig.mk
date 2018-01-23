@@ -14,8 +14,6 @@
 # limitations under the License.
 #
 
-USE_COMMON_RIL := true
-
 # Inherit from Exynos7580-common
 include device/samsung/exynos7580-common/BoardConfigCommon.mk
 
