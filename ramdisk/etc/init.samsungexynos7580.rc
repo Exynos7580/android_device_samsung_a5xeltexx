@@ -42,12 +42,7 @@ on post-fs-data
 
     rm /data/logcat.txt
 
-    # MobiCore Permissions 
-    mkdir /data/app/mcRegistry 0775 system system
-    mkdir /data/app/mcRegistry/TbStorage 0700 system system
-    mkdir /efs/TEE  0770 radio system
-
-#Fix battery percent drop after reboot
+# Fix battery percent drop after reboot
    write /sys/class/power_supply/battery/batt_capacity_max 944
 
 # Create camera directory
@@ -913,25 +908,9 @@ on property:persist.sys.storage_preload=1
 on property:persist.sys.storage_preload=0
     start umount_service
 
-on property:sys.mobicoredaemon.enable=true
-    start cs_service
-
 service sswap /sbin/sswap -s -f 1024
       class core
       user root
       group root
       oneshot
       seclabel u:r:sswap:s0
-
-# MobiCore startup
-service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF000000000000000000000001.drbin -r /system/app/mcRegistry/ffffffffd0000000000000000000000a.tlbin -r /system/app/mcRegistry/ffffffffd00000000000000000000016.tlbin -r /system/app/mcRegistry/ffffffffd0000000000000000000001c.tlbin
-    class core
-    user system
-    group system
-
-# DRK/CS service
-service cs_service /system/bin/cs
-    class main
-    user system
-    group system
-    disabled
