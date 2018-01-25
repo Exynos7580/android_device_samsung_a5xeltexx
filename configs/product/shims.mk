@@ -1,4 +1,5 @@
 # Shims
 PRODUCT_PACKAGES += \
     libshim_gpsd \
-    libshim_camera
+    libshim_camera \
+    libbauthtzcommon_shim
