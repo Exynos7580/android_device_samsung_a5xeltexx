@@ -14,7 +14,7 @@ on early-boot
     write /proc/sys/net/core/wmem_max 2097152
 
 on init
-    export LD_SHIM_LIBS "/system/lib/libsec-ril.so|libprotobuf-cpp-fl26.so:/system/lib/libsec-ril-dsds.so|libprotobuf-cpp-fl26.so:/system/bin/gpsd|/vendor/lib/libshim_gpsd.so:/system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so:/system/lib/hw/camera.universal7580.so|/vendor/lib/libshim_camera.so"
+    export LD_SHIM_LIBS "/system/bin/gpsd|/vendor/lib/libshim_gpsd.so:/system/lib/hw/camera.universal7580.so|/vendor/lib/libshim_camera.so:/system/lib/libexynoscamera.so|/vendor/lib/libexynoscamera_shim.so"
     mkdir /preload 0771 system system
 
     # RIL <-> audioserver comm
