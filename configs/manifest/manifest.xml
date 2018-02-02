@@ -5,6 +5,7 @@
     <!--
 	Audio
     -->
+
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport arch="32">passthrough</transport>
@@ -146,6 +147,21 @@
         <version>1.0</version>
         <interface>
             <name>IGnss</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!--
+        Vibrator
+    -->
+    
+    <hal format="hidl">
+        <name>android.hardware.vibrator</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>1.0</version>
+        <interface>
+            <name>IVibrator</name>
             <instance>default</instance>
         </interface>
     </hal>
