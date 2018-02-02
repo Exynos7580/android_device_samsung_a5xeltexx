@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Comments, Legal notices, etc. here -->
 <manifest version="1.0" type="device">
+
+    <!--
+	Audio
+    -->
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport arch="32">passthrough</transport>
@@ -10,6 +14,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
         <transport arch="32">passthrough</transport>
@@ -19,6 +24,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+
     <hal format="hidl">
         <name>android.hardware.soundtrigger</name>
         <transport>hwbinder</transport>
@@ -28,9 +34,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+
     <!--
-        Graphics
-      -->
+	Graphics
+    -->
+
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
         <transport arch="32">passthrough</transport>
@@ -44,7 +52,8 @@
 
     <!--
         Keymaster
-      -->
+    -->
+    
     <hal format="hidl">
         <name>android.hardware.keymaster</name>
         <transport>hwbinder</transport>
@@ -55,6 +64,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+
+    <!--
+	Camera Provider
+    -->
+
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport arch="32">passthrough</transport>
@@ -64,6 +78,26 @@
             <instance>legacy/0</instance>
         </interface>
     </hal>
+
+    <!--
+	Fingerprint
+    -->
+
+    <hal format="hidl">
+        <name>android.hardware.biometrics.fingerprint</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>2.1</version>
+        <interface>
+            <name>IBiometricsFingerprint</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!--
+	Config Store
+    -->
+
     <hal format="hidl">
         <name>android.hardware.configstore</name>
         <transport>hwbinder</transport>
@@ -73,6 +107,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+
+    <!--
+	GateKeeper
+    -->
+
     <hal format="hidl">
         <name>android.hardware.gatekeeper</name>
         <transport>hwbinder</transport>
@@ -82,6 +121,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+
+    <!--
+	DRM
+    -->
+
     <hal format="hidl">
         <name>android.hardware.drm</name>
         <transport arch="32">passthrough</transport>
@@ -92,6 +136,10 @@
         </interface>
     </hal>
 	
+    <!--
+	GPS
+    -->
+
     <hal format="hidl">
         <name>android.hardware.gnss</name>
         <transport arch="32">passthrough</transport>
@@ -103,8 +151,9 @@
     </hal>
 
     <!--
-        RIL/Radio
-      -->
+        Radio
+    -->
+
     <hal format="hidl">
         <name>android.hardware.radio</name>
         <transport>hwbinder</transport>
@@ -115,6 +164,7 @@
             <instance>slot1</instance>
         </interface>
     </hal>
+
     <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
         <transport>hwbinder</transport>
@@ -128,7 +178,8 @@
 
     <!--
         WiFi
-      -->
+    -->
+
     <hal format="hidl">
         <name>android.hardware.wifi</name>
         <transport>hwbinder</transport>
@@ -139,6 +190,7 @@
             <instance>default</instance>
         </interface>
     </hal>
+
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
