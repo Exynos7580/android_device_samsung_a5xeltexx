@@ -7,6 +7,9 @@ ro.bq.gpu_to_cpu_unsupported=1
 # Games
 debug.egl.force_msaa=true
 
+# HWC
+debug.hwc.force_gpu=1
+
 # Dalvik/Art
 dalvik.vm.heapstartsize=8m
 dalvik.vm.heapgrowthlimit=128m
