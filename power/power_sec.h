@@ -1,6 +1,6 @@
 /* paths of input devices */
 #define TOUCHSCREEN_POWER_PATH "/sys/class/input/input3/enabled"
-#define TOUCHKEY_POWER_PATH "/sys/class/input/input8/enabled"
+#define TOUCHKEY_POWER_PATH "/sys/class/input/input2/enabled"
 
 /* paths of interactive governor */
 #define INTERACTIVE_PATH_L_ABOVE_HISPEED_DELAY "/sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay"
