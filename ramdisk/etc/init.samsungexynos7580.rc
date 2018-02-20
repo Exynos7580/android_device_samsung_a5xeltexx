@@ -59,6 +59,8 @@ on post-fs-data
     chown system radio /sys/class/audio/earjack/key_state
     chown system radio /sys/class/audio/earjack/state
     chown system radio /sys/class/audio/earjack/mic_adc
+    chmod 0660 /dev/i2c-0
+    chown audio audio /dev/i2c-0
 
 # Permissions for dbmd2
     chown system audio /sys/class/voice_trigger/dbd2/vqe_use_case
