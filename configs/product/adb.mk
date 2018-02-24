@@ -1,4 +1,4 @@
-#ifeq ($(TARGET_BUILD_VARIANT),eng)
+ifeq ($(TARGET_BUILD_VARIANT),eng)
 
 PRODUCT_PROPERTY_OVERRIDES += \
        ro.secure=0 \
@@ -9,4 +9,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
        persist.sys.usb.config=adb \
        ro.securestorage.support=false
 
-# endif
+endif
