@@ -15,6 +15,11 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_a5xeltexx.mk \
-    $(LOCAL_DIR)/lineage.mk
+#####################
+# Sensors
+#####################
+
+PRODUCT_PACKAGES += \
+	android.hardware.sensors@1.0-impl \
+	android.hardware.sensors@1.0-service \
+	android.hardware.vibrator@1.0-impl

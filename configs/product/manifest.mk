@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2017 The Haxynox Project
+# Copyright 2016 The CyanogenMod Project
+# Copyright 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +15,9 @@
 # limitations under the License.
 #
 
+#####################
 # Manifest
+#####################
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/manifest/manifest.xml:system/vendor/manifest.xml
