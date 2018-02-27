@@ -125,7 +125,6 @@ vendor/etc/nxp/mVoIPSec/Tx_ControlParams_WIDEBAND_WIRED_HEADPHONE.txt
 vendor/etc/nxp/mVoIPSec/Tx_ControlParams_WIDEBAND_WIRED_HEADSET.txt
 
 ### Radio
-bin/rild
 lib/libsec-ril.so
 lib/libsec-ril-dsds.so
 
@@ -133,13 +132,13 @@ lib/libsec-ril-dsds.so
 lib/hw/sensors.universal7580.so
 vendor/lib/libyasalgo.so
 vendor/lib/libwvm.so
+vendor/lib/libwvdrm_L1.so
 vendor/lib/libWVStreamControlAPI_L1.so
 lib/libsensorservice.so
 lib/liboemcrypto.so
 
 ### Wi-Fi
 etc/wifi/bcmdhd_apsta.bin
-etc/wifi/bcmdhd_ibss.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_sta.bin
 etc/wifi/nvram_mfg.txt
