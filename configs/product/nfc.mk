@@ -31,6 +31,3 @@ PRODUCT_PACKAGES += \
 	Tag \
 	com.android.nfc_extras \
 	android.hardware.nfc@1.0-impl
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.nfc.sec_hal=true
