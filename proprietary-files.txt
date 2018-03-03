@@ -86,7 +86,7 @@ vendor/lib/libyasalgo.so
 lib/libsensorservice.so
 
 ###################
-# DRM
+# Widevine
 ###################
 
 vendor/lib/libwvm.so
