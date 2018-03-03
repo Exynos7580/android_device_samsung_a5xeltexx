@@ -111,6 +111,10 @@
 /dev/tuihw                0660   system     system
 /dev/tzirs                0660   system     system
 
+# fingerprint
+/dev/vfsspi        0660   system     system
+/dev/esfp0        0660   system     system
+
 # Sensorhub IIO
 /dev/ssp_sensorhub        0660   system		system
 /dev/iio:device*          0660   system		system
