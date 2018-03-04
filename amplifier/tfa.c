@@ -182,10 +182,8 @@ int tfa_power(tfa_device_t *tfa_dev, bool on) {
     }
 
     // this implementation requires explicit clock control
-    if (on && !tfa_dev->clock_enabled) {
+    if (on) {
         tfa_clock_on(tfa_dev);
-    } else if (!on && tfa_dev->clock_enabled) {
-        tfa_clock_off(tfa_dev);
     }
 
     rc = tfa_dev->tfa_enable(tfa_dev->tfa_handle, on ? 1 : 0);
