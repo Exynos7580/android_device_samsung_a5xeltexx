@@ -1,9 +1,6 @@
 # Display
 ro.sf.lcd_density=480
 
-# Games
-debug.egl.force_msaa=true
-
 # Dalvik/Art
 dalvik.vm.heapstartsize=8m
 dalvik.vm.heapgrowthlimit=128m
@@ -27,35 +24,3 @@ ro.hwui.text_small_cache_width=1024
 ro.hwui.text_small_cache_height=1024
 ro.hwui.text_large_cache_width=2048
 ro.hwui.text_large_cache_height=1024
-
-# Radio
-telephony.lteOnCdmaDevice=0
-persist.radio.sib16_support=0
-rild.libpath=/system/lib/libsec-ril.so
-rild.libargs=-d /dev/ttyS0
-ro.telephony.default_network=9
-ro.use_data_netmgrd=false
-persist.data.netmgrd.qos.enable=false
-ro.ril.hsxpa=1
-ro.ril.gprsclass=10
-ro.smps.enable=true
-persist.data.netmgrd.qos.enable=false
-ro.use_data_netmgrd=false
-ro.telephony.get_imsi_from_sim=true
-ro.ril.force_eri_from_xml=true
-
-# Network
-# Define default initial receive window size in segments.
-net.tcp.default_init_rwnd=60
-
-# sdcardfs
-ro.sys.sdcardfs=true
-
-# Allows healthd to boot directly from charger mode rather than initiating a reboot.
-ro.enable_boot_charger_mode=1
-
-# Default OMX service to non-Treble
-persist.media.treble_omx=false
-
-# Factory Reset Protection
-ro.frp.pst=/dev/block/platform/13540000.dwmmc0/by-name/PERSISTENT
