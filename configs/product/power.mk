@@ -20,6 +20,6 @@
 #####################
 
 PRODUCT_PACKAGES += \
-	power.exynos5 \
+	power.universal7580 \
 	android.hardware.power@1.0-service \
 	android.hardware.power@1.0-impl
