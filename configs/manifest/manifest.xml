@@ -6,7 +6,7 @@
     
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport>hwbinder</transport>
+        <transport arch="32">passthrough</transport>
         <version>2.0</version>
         <interface>
             <name>IDevicesFactory</name>
@@ -20,7 +20,7 @@
 
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
-        <transport>hwbinder</transport>
+        <transport arch="32">passthrough</transport>
         <version>2.0</version>
         <interface>
             <name>IEffectsFactory</name>
@@ -292,7 +292,7 @@
 
     <hal format="hidl">
         <name>android.hardware.soundtrigger</name>
-        <transport>hwbinder</transport>
+        <transport arch="32">passthrough</transport>
         <version>2.0</version>
         <interface>
             <name>ISoundTriggerHw</name>
