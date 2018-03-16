@@ -52,7 +52,12 @@ on fs
     chown system radio /sys/class/sensors/accelerometer_sensor/mcu_rev
     chown system radio /sys/class/sensors/accelerometer_sensor/mcu_name
 
-# BHY
+    # Fingerprint_sensor
+    chown system radio /sys/class/fingerprint/fingerprint/type_check
+    chown system radio /sys/class/fingerprint/fingerprint/name
+    chown system radio /sys/class/fingerprint/fingerprint/vendor
+
+    # BHY
     chown system radio  /sys/devices/13870000.hsi2c/i2c-0/0-0028/iio:device0/event_shealth_int
     chown system radio  /sys/devices/13870000.hsi2c/i2c-0/0-0028/iio:device0/pedometer_steps
     chown system radio  /sys/devices/13870000.hsi2c/i2c-0/0-0028/iio:device0/shealth_cadence
