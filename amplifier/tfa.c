@@ -35,6 +35,8 @@ static void * write_dummy_data(void *param) {
     uint8_t *buffer;
     int size;
     struct pcm *pcm;
+    bool signaled = false;
+
     struct pcm_config config = {
         .channels = 2,
         .rate = 48000,
@@ -63,7 +65,6 @@ static void * write_dummy_data(void *param) {
         goto err_close_pcm;
     }
 
-    bool signaled = false;
     do {
         if (pcm_write(pcm, buffer, size)) {
             ALOGE("%s: pcm_write failed", __func__);
@@ -84,6 +85,13 @@ err_free:
 err_close_pcm:
     pcm_close(pcm);
 exit:
+    if (!signaled) {
+        pthread_mutex_lock(&t->mutex);
+        t->writing = true;
+        pthread_cond_signal(&t->cond);
+        pthread_mutex_unlock(&t->mutex);
+    }
+
     return NULL;
 }
 
