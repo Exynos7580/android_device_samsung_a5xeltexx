@@ -35,4 +35,4 @@ PRODUCT_PACKAGES += \
 # cpboot-daemon for modem
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/radio/cbd:system/bin/cbd \
-    $(LOCAL_PATH)/ramdisk/vendor/rild.rc:system/vendor/etc/init/rild.rc
+    device/samsung/exynos7580-common/configs/init/rild.rc:system/vendor/etc/init/rild.rc
