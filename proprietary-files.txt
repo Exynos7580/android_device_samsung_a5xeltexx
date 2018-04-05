@@ -80,13 +80,6 @@ lib/libMcRegistry.so
 bin/mcDriverDaemon
 
 ###################
-# Radio
-###################
-
-lib/libsec-ril.so
-lib/libsec-ril-dsds.so
-
-###################
 # Sensors
 ###################
 
