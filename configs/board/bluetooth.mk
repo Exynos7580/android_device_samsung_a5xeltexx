@@ -16,7 +16,7 @@
 #
 
 #####################
-# Includes
+# Bluetooth
 #####################
 
-TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
