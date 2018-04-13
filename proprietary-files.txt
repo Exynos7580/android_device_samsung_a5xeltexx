@@ -113,7 +113,6 @@ vendor/firmware/sec_s3fwrn5s_firmware.bin
 # Fingerprint
 ###################
 
-lib/hw/fingerprint.default.so
 lib/libbauthserver.so
 lib/libbauthtzcommon.so
 lib/libegis_fp_normal_sensor_test.so
